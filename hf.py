@@ -4,7 +4,9 @@ from huggingface_hub import InferenceClient
 MODELS = getattr(
     config,
     "HF_MODELS",
-    ["meta-llama/Llama-3.1-8B-Instruct"],
+    ["meta-llama/Llama-3.1-8B-Instruct", 
+    "deepseek-ai/DeepSeek-R1", 
+    "google/gemma-3-4b-it"],
 )
 
 def generate_response(prompt: str, temperature: float = 0.3, max_tokens: int = 512) -> str:
@@ -33,3 +35,4 @@ def generate_response(prompt: str, temperature: float = 0.3, max_tokens: int = 5
         "2) Replace HF model in hf.py (HF_MODELS).\n"
         f"Details: {type(last_err).__name__}: {last_err}"
     )
+
