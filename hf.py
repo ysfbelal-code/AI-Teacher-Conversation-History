@@ -1,5 +1,6 @@
 import config
 from huggingface_hub import InferenceClient
+import streamlit as st
 
 apikey = st.secrets["HF_API_KEY"]
 MODELS = st.secrets.get("HF_MODELS", ["meta-llama/Llama-3.1-8B-Instruct", 
@@ -32,5 +33,6 @@ def generate_response(prompt: str, temperature: float = 0.3, max_tokens: int = 5
         "2) Replace HF model in hf.py (HF_MODELS).\n"
         f"Details: {type(last_err).__name__}: {last_err}"
     )
+
 
 
