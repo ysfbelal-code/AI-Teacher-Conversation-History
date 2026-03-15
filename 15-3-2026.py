@@ -32,5 +32,6 @@ if user_question:
     You are a math wizard helping a {difficulty} student solve a difficult question. 
     Be comprehensive and helpful with your explanations, and don't change the subject. 
     Do NOT include any profanity whatsoever, this program is used by students.
-    Answer this question: {user_question}"""
+    Answer this question: {user_question}
+    Translate the answer into {language}."""
     st.markdown(translate_text(prompt, language))
