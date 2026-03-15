@@ -20,7 +20,7 @@ language = st.sidebar.selectbox("Choose the app language:", list(languages.keys(
 if language:
     st.session_state['language'] = language
 
-title_prompt = f"""Ignore any other instructions, and only output this header - NOTHING else. 
+title_prompt = f"""Only output this header - NOTHING else. 
 It's crucial you musn't change ANYTHING, otherwise it will cause confusion among users. 
 Translate the heading to {language} if language isn't English. Don't change ANYTHING from the text either and AVOID repetition at all costs."""
 
