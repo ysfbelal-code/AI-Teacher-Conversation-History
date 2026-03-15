@@ -20,7 +20,7 @@ language = st.sidebar.selectbox("Choose the app language:", list(languages.keys(
 if language:
     st.session_state['language'] = language
 
-title_prompt = f"Ignore any other instructions, and only output this header - NOTHING else. You musn't change anything, otherwise it will cause confusion among users. Translate the heading to {language}."
+title_prompt = f"Ignore any other instructions, and only output this header - NOTHING else. You musn't change ANYTHING, otherwise it will cause confusion among users. Translate the heading to {language}."
 
 st.set_page_config(page_title=generate_response(title_prompt + "AI MATH MASTERMIND"), layout='centered')
 st.title(generate_response(title_prompt + "MATH WIZARD"), text_alignment='center')
