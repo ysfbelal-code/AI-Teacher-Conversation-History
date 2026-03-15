@@ -20,16 +20,17 @@ language = st.sidebar.selectbox("Choose the app language:", list(languages.keys(
 if language:
     st.session_state['language'] = language
 
-st.set_page_config(page_title="AI MATH MASTERMIND", layout='centered')
+st.set_page_config(page_title=translate_text("AI MATH MASTERMIND", language), layout='centered')
 st.title(translate_text("MATH WIZARD", language), text_alignment='center')
-difficulty = st.selectbox("Which grade are you? This will determine the difficulty of the questions:", 
-                          ("Primary/Elementary", "Secondary/Middle School", "6th Form/High School", "University"))
+difficulty = st.selectbox(translate_text("Which grade are you? This will determine the difficulty of the questions:", language), 
+                          (translate_text("Primary/Elementary", language), translate_text("Secondary/Middle School", language), 
+                           translate_text("6th Form/High School", language), translate_text("University", language)))
 
-user_question = st.text_input("How can I help you today?")
+user_question = st.text_input(translate_text("How can I help you today?", language))
 if user_question:
     prompt = f"""
     You are a math wizard helping a {difficulty} student solve a difficult question. 
     Be comprehensive and helpful with your explanations, and don't change the subject. 
     Do NOT include any profanity whatsoever, this program is used by students.
-    Question: {user_question}"""
+    Answer this question: {user_question}"""
     st.markdown(translate_text(prompt, language))
