@@ -26,8 +26,10 @@ difficulty = st.selectbox("Which grade are you? This will determine the difficul
                           ("Primary/Elementary", "Secondary/Middle School", "6th Form/High School", "University"))
 
 user_question = st.text_input("How can I help you today?")
-prompt = f"""
-You are a math wizard helping a {difficulty} student solve a difficult question. 
-Be comprehensive and helpful with your explanations, and don't change the subject. 
-Do NOT include any profanity whatsoever, this program is used by students."""
-st.markdown(translate_text(prompt, language))
+if user_question:
+    prompt = f"""
+    You are a math wizard helping a {difficulty} student solve a difficult question. 
+    Be comprehensive and helpful with your explanations, and don't change the subject. 
+    Do NOT include any profanity whatsoever, this program is used by students.
+    Question: {user_question}"""
+    st.markdown(translate_text(prompt, language))
