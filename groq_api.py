@@ -1,6 +1,8 @@
 import streamlit
 from openai import OpenAI
 
+@streamlit.cache_data(show_spinner=False)
+
 def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 1024):
     apikey = streamlit.secrets['groq_api']
     groq_url = "https://api.groq.com/openai/v1"
@@ -36,26 +38,3 @@ def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 1024)
         "2) Replace Groq model in MODELS.\n"
         f"Details: {type(last_err).__name__}: {last_err}"
     )
-
-
-@streamlit.cache_data(show_spinner=False)
-def translate_text(text: str, target_lang: str) -> str:
-    """Translate a UI string to target_lang using Groq. Falls back to original on error."""
-    if target_lang.lower() == "english":
-        return text
-
-    prompt = (
-        f"You are a translation engine. "
-        f"Translate the text below into {target_lang}. "
-        f"Output the translation and absolutely nothing else — "
-        f"no greetings, no explanations, no quotes, no punctuation changes.\n\n"
-        f"Text: {text}"
-    )
-
-    try:
-        result = generate_response(prompt, 0.3, 1024)
-        if result and not result.startswith("Error"):
-            return result.strip()
-        return text
-    except Exception:
-        return text
