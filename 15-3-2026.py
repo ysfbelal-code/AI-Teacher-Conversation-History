@@ -31,7 +31,8 @@ difficulty = st.selectbox(generate_response(title_prompt + "Which grade are you?
                            generate_response(title_prompt + "6th Form/High School"), generate_response(title_prompt + "University")))
 
 user_question = st.text_input(generate_response(title_prompt + "How can I help you today?"))
-if user_question:
+solve = st.button("Solve")
+if solve:
     prompt = f"""
     You are a math wizard helping a {difficulty} student solve a difficult question. 
     Be comprehensive and helpful with your explanations, and don't change the subject. 
