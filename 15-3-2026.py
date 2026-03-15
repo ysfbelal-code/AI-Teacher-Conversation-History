@@ -1,4 +1,4 @@
-from groq_api import translate_text
+from groq_api import generate_response
 import streamlit as st
 from languages import languages
 
@@ -20,13 +20,15 @@ language = st.sidebar.selectbox("Choose the app language:", list(languages.keys(
 if language:
     st.session_state['language'] = language
 
-st.set_page_config(page_title=translate_text("AI MATH MASTERMIND", language), layout='centered')
-st.title(translate_text("MATH WIZARD", language), text_alignment='center')
-difficulty = st.selectbox(translate_text("Which grade are you? This will determine the difficulty of the questions:", language), 
-                          (translate_text("Primary/Elementary", language), translate_text("Secondary/Middle School", language), 
-                           translate_text("6th Form/High School", language), translate_text("University", language)))
+title_prompt = f"This is just a heading. Only output this, and nothing else. Translate the heading to {language}."
 
-user_question = st.text_input(translate_text("How can I help you today?", language))
+st.set_page_config(page_title=generate_response(title_prompt + "AI MATH MASTERMIND"), layout='centered')
+st.title(generate_response(title_prompt + "MATH WIZARD"), text_alignment='center')
+difficulty = st.selectbox(generate_response(title_prompt + "Which grade are you? This will determine the difficulty of the questions:"), 
+                          (generate_response(title_prompt + "Primary/Elementary"), generate_response(title_prompt + "Secondary/Middle School"), 
+                           generate_response(title_prompt + "6th Form/High School"), generate_response(title_prompt + "University")))
+
+user_question = st.text_input(generate_response(title_prompt + "How can I help you today?"))
 if user_question:
     prompt = f"""
     You are a math wizard helping a {difficulty} student solve a difficult question. 
@@ -34,4 +36,4 @@ if user_question:
     Do NOT include any profanity whatsoever, this program is used by students.
     Answer this question: {user_question}
     Translate the answer into {language}."""
-    st.markdown(translate_text(prompt, language))
+    st.markdown(generate_response(prompt))
