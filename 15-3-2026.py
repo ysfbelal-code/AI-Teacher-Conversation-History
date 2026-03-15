@@ -25,6 +25,14 @@ It's crucial you musn't change ANYTHING, otherwise it will cause confusion among
 Translate the heading to {language} if language isn't English. Don't change ANYTHING from the text either."""
 
 st.set_page_config(page_title=generate_response(title_prompt + "AI MATH MASTERMIND"), layout='centered')
+c1, c2, c3 = st.columns([1,1,1])
+with c1:
+    view = st.button(generate_response(title_prompt + ("View conversation history")))
+with c2:
+    clear = st.button(generate_response(title_prompt + "Clear conversation history"))
+with c3:
+    export = st.button(generate_response(title_prompt + ("Export conversation history")))
+    
 st.title(generate_response(title_prompt + "MATH WIZARD"), text_alignment='center')
 difficulty = st.selectbox(generate_response(title_prompt + "Which grade are you? This will determine the difficulty of the questions:"), 
                           (generate_response(title_prompt + "Primary/Elementary"), generate_response(title_prompt + "Secondary/Middle School"), 
