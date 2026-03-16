@@ -16,10 +16,7 @@ def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512) 
             c = OpenAI(api_key=apikey, base_url=url)
             r = c.chat.completions.create(
                 model=m,
-                messages=[{'role':'system', "content": f"""Only output this text - NOTHING else. 
-                            It's crucial you musn't change ANYTHING, otherwise it will cause confusion among users. 
-                            Translate the heading to {st.session_state['language']} if language isn't English. 
-                            Don't change ANYTHING from the text either and AVOID repetition at all costs. {prompt}"""}, 
+                messages=[{'role':'system', "content": "You follow instructions exactly. Output ONLY what is asked — no preamble, no explanation, no extra text."}, 
                 {'role': 'user', 'content': prompt}],
                 temperature=temperature,
                 max_tokens=tokens
