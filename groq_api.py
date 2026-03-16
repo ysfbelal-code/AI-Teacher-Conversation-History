@@ -6,7 +6,11 @@ from openai import OpenAI
 def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512):
     apikey = streamlit.secrets['groq_api']
     groq_url = "https://api.groq.com/openai/v1"
-    models = streamlit.secrets.get('GROQ_MODELS', ['meta-llama/llama-prompt-guard-2-22m', 'meta-llama/llama-prompt-guard-2-86m'])
+    models = streamlit.secrets.get('GROQ_MODELS', [
+    "llama-3.3-70b-versatile",
+    "llama-3.1-8b-instant",
+    "gemma2-9b-it"
+])
 
     if not apikey:
         return "Error: groq_api missing in secrets"
