@@ -1,12 +1,12 @@
-import streamlit
+import streamlit as st
 from openai import OpenAI
 
-@streamlit.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False)
 
-def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512, language: str = 'English') -> str:
+def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512) -> str:
     url = "https://api.groq.com/openai/v1"
-    apikey = streamlit.secrets['groq_api']
-    models = streamlit.secrets.get('GROQ_MODELS', ['qwen/qwen3-32b', 'moonshotai/kimi-k2-instruct', 'llama-3.3-70b-versatile',])
+    apikey = st.secrets['groq_api']
+    models = st.secrets.get('GROQ_MODELS', ['qwen/qwen3-32b', 'moonshotai/kimi-k2-instruct', 'llama-3.3-70b-versatile',])
     if not apikey:
         return "Error: hf_api missing in secrets"
 
@@ -18,7 +18,7 @@ def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512, 
                 model=m,
                 messages=[{'role':'system', "content": f"""Only output this text - NOTHING else. 
                             It's crucial you musn't change ANYTHING, otherwise it will cause confusion among users. 
-                            Translate the heading to {language} if language isn't English. 
+                            Translate the heading to {st.session_state['language']} if language isn't English. 
                             Don't change ANYTHING from the text either and AVOID repetition at all costs. {prompt}"""}, 
                 {'role': 'user', 'content': prompt}],
                 temperature=temperature,
@@ -40,10 +40,10 @@ def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512, 
         return "Error: no models available"
 
     return (
-        "HF model failed."
+        "Groq model failed."
         f"Tried models: {models}"
         "Fix:"
-        "1) Switch to Groq by inserting Groq's models and changing to your Groq API key, or"
-        "2) Replace HF model in MODELS.\n"
+        "1) Switch to HF by inserting HF's models and changing to your HF API key, or"
+        "2) Replace Groq model in MODELS.\n"
         f"Details: {type(last_err).__name__}: {last_err}"
     )
