@@ -5,7 +5,7 @@ from languages import languages
 st.set_page_config(page_title="AI MATH MASTERMIND", layout='centered')
 st.session_state.setdefault('conversation', [])
 
-language = st.sidebar.selectbox("Choose the app language:", list(languages.keys()))
+language = st.sidebar.selectbox("Choose the app language:", list(languages.keys()), key='language_select')
 
 if 'language' not in st.session_state:
     st.session_state['language'] = 'English'
@@ -38,11 +38,11 @@ header3 = generate_response(title_prompt + "Export conversation history", langua
 st.title(title, text_alignment='center')
 c1, c2, c3 = st.columns([1,1,1])
 with c1:
-    view = st.button(header)
+    view = st.button(header, key='view_button')
 with c2:
-    clear = st.button(header2)
+    clear = st.button(header2, key='clear_button')
 with c3:
-    export = st.button(header3)
+    export = st.button(header3, key='export_button')
 
 grade = generate_response(title_prompt + "Which grade are you? This will determine the difficulty of the questions:", language=language)
 choice = generate_response(title_prompt + "Primary/Elementary", language=language)
@@ -50,11 +50,11 @@ choice2 = generate_response(title_prompt + "Secondary/Middle School", language=l
 choice3 = generate_response(title_prompt + "6th Form/High School", language=language)
 choice4 = generate_response(title_prompt + "University", language=language)
 help = generate_response(title_prompt + "How can I help you today?", language=language)
-solve = generate_response(title_prompt + "Solve", language=language)
+solve_question = generate_response(title_prompt + "Solve", language=language)
 
-difficulty = st.selectbox(grade, (choice, choice2, choice3, choice4))
-user_question = st.text_input(help)
-solve = st.button(solve)
+difficulty = st.selectbox(grade, (choice, choice2, choice3, choice4), key='difficulty_select')
+user_question = st.text_input(help, key='question_input')
+solve = st.button(solve_question, key='solve_button')
 
 if solve:
     prompt = f"""
