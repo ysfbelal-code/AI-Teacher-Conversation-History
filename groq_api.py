@@ -6,7 +6,7 @@ from openai import OpenAI
 def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512):
     url = "https://api.groq.com/openai/v1"
     apikey = streamlit.secrets['groq_api']
-    models = streamlit.secrets.get('GROQ_MODELS', ['llama-3.3-70b-versatile', 'openai/gpt-oss-120b'])
+    models = streamlit.secrets.get('GROQ_MODELS', ['qwen/qwen3-32b', 'moonshotai/kimi-k2-instruct', 'llama-3.3-70b-versatile',])
     if not apikey:
         return "Error: hf_api missing in secrets"
 
@@ -30,10 +30,10 @@ def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512):
         return "Error: no models available"
 
     return (
-        "Groq model failed."
+        "HF model failed."
         f"Tried models: {models}"
         "Fix:"
-        "1) Switch to HF by inserting HF's models and changing to your HF API key, or"
-        "2) Replace Groq model in MODELS.\n"
+        "1) Switch to Groq by inserting Groq's models and changing to your Groq API key, or"
+        "2) Replace HF model in MODELS.\n"
         f"Details: {type(last_err).__name__}: {last_err}"
     )
