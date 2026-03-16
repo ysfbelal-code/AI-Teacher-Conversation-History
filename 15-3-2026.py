@@ -30,10 +30,10 @@ html, body, [class*="css"], [class*="st-"], .stApp, .stApp * {
 </style>
 """, unsafe_allow_html=True)
 
-title = generate_response(title_prompt + "MATH WIZARD", language=language)
-header = generate_response(title_prompt + "View conversation history", language=language)
-header2 = generate_response(title_prompt + "Clear conversation history", language=language)
-header3 = generate_response(title_prompt + "Export conversation history", language=language)
+title = generate_response(title_prompt + "MATH WIZARD")
+header = generate_response(title_prompt + "View conversation history")
+header2 = generate_response(title_prompt + "Clear conversation history")
+header3 = generate_response(title_prompt + "Export conversation history")
 
 st.title(title, text_alignment='center')
 c1, c2, c3 = st.columns([1,1,1])
@@ -44,13 +44,13 @@ with c2:
 with c3:
     export = st.button(header3, key='export_button')
 
-grade = generate_response(title_prompt + "Which grade are you? This will determine the difficulty of the questions:", language=language)
-choice = generate_response(title_prompt + "Primary/Elementary", language=language)
-choice2 = generate_response(title_prompt + "Secondary/Middle School", language=language)
-choice3 = generate_response(title_prompt + "6th Form/High School", language=language)
-choice4 = generate_response(title_prompt + "University", language=language)
-help = generate_response(title_prompt + "How can I help you today?", language=language)
-solve_question = generate_response(title_prompt + "Solve", language=language)
+grade = generate_response(title_prompt + "Which grade are you? This will determine the difficulty of the questions:")
+choice = generate_response(title_prompt + "Primary/Elementary")
+choice2 = generate_response(title_prompt + "Secondary/Middle School")
+choice3 = generate_response(title_prompt + "6th Form/High School")
+choice4 = generate_response(title_prompt + "University")
+help = generate_response(title_prompt + "How can I help you today?")
+solve_question = generate_response(title_prompt + "Solve")
 
 difficulty = st.selectbox(grade, (choice, choice2, choice3, choice4), key='difficulty_select')
 user_question = st.text_input(help, key='question_input')
@@ -62,5 +62,5 @@ if solve:
     Be comprehensive and helpful with your explanations, and don't change the subject. 
     Do NOT include any profanity whatsoever, this program is used by students.
     Answer this question: {user_question}"""
-    answer = generate_response(prompt, language=language)
+    answer = generate_response(prompt)
     st.markdown(answer)
