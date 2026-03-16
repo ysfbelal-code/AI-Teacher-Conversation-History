@@ -6,6 +6,7 @@ st.set_page_config(page_title="AI MATH MASTERMIND", layout='centered')
 st.session_state.setdefault('conversation', [])
 
 language = st.sidebar.selectbox("Choose the app language:", list(languages.keys()))
+
 if 'language' not in st.session_state:
     st.session_state['language'] = 'English'
 if language != st.session_state.get('prev_language'):
@@ -29,10 +30,10 @@ html, body, [class*="css"], [class*="st-"], .stApp, .stApp * {
 </style>
 """, unsafe_allow_html=True)
 
-title = generate_response(title_prompt + "MATH WIZARD")
-header = generate_response(title_prompt + ("View conversation history"))
-header2 = generate_response(title_prompt + ("Clear conversation history"))
-header3 = generate_response(title_prompt + ("Export conversation history"))
+title = generate_response(title_prompt + "MATH WIZARD", language=language)
+header = generate_response(title_prompt + "View conversation history", language=language)
+header2 = generate_response(title_prompt + "Clear conversation history", language=language)
+header3 = generate_response(title_prompt + "Export conversation history", language=language)
 
 st.title(title, text_alignment='center')
 c1, c2, c3 = st.columns([1,1,1])
@@ -43,13 +44,13 @@ with c2:
 with c3:
     export = st.button(header3)
 
-grade = generate_response(title_prompt + "Which grade are you? This will determine the difficulty of the questions:")
-choice = generate_response(title_prompt + "Primary/Elementary")
-choice2 = generate_response(title_prompt + "Secondary/Middle School")
-choice3 = generate_response(title_prompt + "6th Form/High School")
-choice4 = generate_response(title_prompt + "University")
-help = generate_response(title_prompt + "How can I help you today?")
-solve = generate_response(title_prompt + "Solve")
+grade = generate_response(title_prompt + "Which grade are you? This will determine the difficulty of the questions:", language=language)
+choice = generate_response(title_prompt + "Primary/Elementary", language=language)
+choice2 = generate_response(title_prompt + "Secondary/Middle School", language=language)
+choice3 = generate_response(title_prompt + "6th Form/High School", language=language)
+choice4 = generate_response(title_prompt + "University", language=language)
+help = generate_response(title_prompt + "How can I help you today?", language=language)
+solve = generate_response(title_prompt + "Solve", language=language)
 
 difficulty = st.selectbox(grade, (choice, choice2, choice3, choice4))
 user_question = st.text_input(help)
@@ -60,7 +61,6 @@ if solve:
     You are a math wizard helping a {difficulty} student solve a difficult question. 
     Be comprehensive and helpful with your explanations, and don't change the subject. 
     Do NOT include any profanity whatsoever, this program is used by students.
-    Answer this question: {user_question}
-    Translate the answer into {language}."""
-    answer = generate_response(prompt)
+    Answer this question: {user_question}"""
+    answer = generate_response(prompt, language=language)
     st.markdown(answer)
