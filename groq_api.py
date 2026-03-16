@@ -22,12 +22,17 @@ def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512, 
                             Don't change ANYTHING from the text either and AVOID repetition at all costs. {prompt}"""}, 
                 {'role': 'user', 'content': prompt}],
                 temperature=temperature,
-                max_tokens=tokens,
-                extra_body={'thinking': {'type': 'disabled'}} 
+                max_tokens=tokens
             )
+
             content = r.choices[0].message.content
+            
+            if '<think>' in content and '</think>' in content:
+                content = content.split('</think>')[-1].strip()
+
             if content is not None:
                 return content
+            
         except Exception as e:
             last_err = e
 
@@ -35,10 +40,10 @@ def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512, 
         return "Error: no models available"
 
     return (
-        "Groq model failed."
+        "HF model failed."
         f"Tried models: {models}"
         "Fix:"
-        "1) Switch to HF by inserting HF's models and changing to your HF API key, or"
-        "2) Replace Groq model in MODELS.\n"
+        "1) Switch to Groq by inserting Groq's models and changing to your Groq API key, or"
+        "2) Replace HF model in MODELS.\n"
         f"Details: {type(last_err).__name__}: {last_err}"
     )
