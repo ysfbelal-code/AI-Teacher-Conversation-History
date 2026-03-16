@@ -35,10 +35,10 @@ def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512, 
         return "Error: no models available"
 
     return (
-        "HF model failed."
+        "Groq model failed."
         f"Tried models: {models}"
         "Fix:"
-        "1) Switch to Groq by inserting Groq's models and changing to your Groq API key, or"
-        "2) Replace HF model in MODELS.\n"
+        "1) Switch to HF by inserting HF's models and changing to your HF API key, or"
+        "2) Replace Groq model in MODELS.\n"
         f"Details: {type(last_err).__name__}: {last_err}"
     )
