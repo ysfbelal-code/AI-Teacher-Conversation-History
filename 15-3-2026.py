@@ -1,4 +1,4 @@
-from groq_api import generate_response
+from hf_api import generate_response
 import streamlit as st
 from languages import languages
 
