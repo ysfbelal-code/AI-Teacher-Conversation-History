@@ -1,7 +1,6 @@
 from groq_api import generate_response
 import streamlit as st
 from languages import languages
-
 if 'language' not in st.session_state:
     st.session_state['language'] = 'English'
 language = st.session_state['language']
@@ -13,6 +12,7 @@ Don't change ANYTHING from the text either and AVOID repetition at all costs."""
 
 st.set_page_config(page_title=generate_response(title_prompt + "AI MATH MASTERMIND"), layout='centered')
 st.session_state.setdefault('conversation', [])
+
 
 st.markdown("""
 <style>
@@ -32,15 +32,22 @@ st.title(generate_response(title_prompt + "MATH WIZARD"), text_alignment='center
 
 c1, c2, c3 = st.columns([1,1,1])
 with c1:
-    view = st.button(generate_response(title_prompt + ("View conversation history")))
+    header = generate_response(title_prompt + ("View conversation history"))
+    view = st.button(header)
 with c2:
-    clear = st.button(generate_response(title_prompt + "Clear conversation history"))
+    header2 = generate_response(title_prompt + ("Clear conversation history"))
+    clear = st.button(header2)
 with c3:
-    export = st.button(generate_response(title_prompt + ("Export conversation history")))
-    
-difficulty = st.selectbox(generate_response(title_prompt + "Which grade are you? This will determine the difficulty of the questions:"), 
-                          (generate_response(title_prompt + "Primary/Elementary"), generate_response(title_prompt + "Secondary/Middle School"), 
-                           generate_response(title_prompt + "6th Form/High School"), generate_response(title_prompt + "University")))
+    header3 = generate_response(title_prompt + ("Export conversation history"))
+    export = st.button(header3)
+
+header4 = generate_response(title_prompt + "Which grade are you? This will determine the difficulty of the questions:")
+choice = generate_response(title_prompt + "Primary/Elementary")
+choice2 = generate_response(title_prompt + "Secondary/Middle School")
+choice3 = generate_response(title_prompt + "6th Form/High School")
+choice4 = generate_response(title_prompt + "University")
+
+difficulty = st.selectbox(header4, (choice, choice2, choice3, choice4))
 
 user_question = st.text_input(generate_response(title_prompt + "How can I help you today?"))
 solve = st.button(generate_response(title_prompt + "Solve"))
