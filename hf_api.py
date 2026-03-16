@@ -1,24 +1,22 @@
 import streamlit
-from openai import OpenAI
+from huggingface_hub import InferenceClient
 
 @streamlit.cache_data(show_spinner=False)
 
 def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512):
-    apikey = streamlit.secrets['groq_api']
-    groq_url = "https://api.groq.com/openai/v1"
-    models = streamlit.secrets.get('GROQ_MODELS', [
-    "llama-3.3-70b-versatile",
-    "llama-3.1-8b-instant",
-    "gemma2-9b-it"
+    apikey = streamlit.secrets['hf_api']
+    models = streamlit.secrets.get('HF_MODELS', [
+    "TeichAI/Qwen3-30B-A3B-Thinking-2507-Claude-4.5-Sonnet-High-Reasoning-Distill-GGUF", 
+    "TeichAI/Qwen3-4B-Thinking-2507-Claude-Haiku-4.5-High-Reasoning-Distill",
+    "TeichAI/Qwen3-4B-Instruct-2507-Claude-Haiku-4.5-Distill",
 ])
-
     if not apikey:
-        return "Error: groq_api missing in secrets"
+        return "Error: hf_api missing in secrets"
 
     last_err = None
     for m in models:
         try:
-            c = OpenAI(api_key=apikey, base_url=groq_url)
+            c = InferenceClient(model=m, token=apikey)
             r = c.chat.completions.create(
                 model=m,
                 messages=[{'role': 'user', 'content': prompt}],
@@ -35,10 +33,10 @@ def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512):
         return "Error: no models available"
 
     return (
-        "Groq model failed."
+        "HF model failed."
         f"Tried models: {models}"
         "Fix:"
-        "1) Switch to Hugging Face by inserting HF's models and changing to your HF API key, or"
-        "2) Replace Groq model in MODELS.\n"
+        "1) Switch to Groq by inserting Groq's models and changing to your Groq API key, or"
+        "2) Replace HF model in MODELS.\n"
         f"Details: {type(last_err).__name__}: {last_err}"
     )
