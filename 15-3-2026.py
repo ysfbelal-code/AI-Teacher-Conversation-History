@@ -2,8 +2,14 @@ from groq_api import generate_response
 import streamlit as st
 from languages import languages
 
+language = st.sidebar.selectbox("Choose the app language:", list(languages.keys()))
 if 'language' not in st.session_state:
     st.session_state['language'] = 'English'
+if language != st.session_state.get('prev_language'):
+    st.cache_data.clear()
+    st.session_state['prev_language'] = language
+if language:
+    st.session_state['language'] = language
 
 title_prompt = f"""Only output this title - NOTHING else. 
 It's crucial you musn't change ANYTHING, otherwise it will cause confusion among users. 
@@ -22,18 +28,6 @@ html, body, [class*="css"], [class*="st-"], .stApp, .stApp * {
 }
 </style>
 """, unsafe_allow_html=True)
-
-language = st.sidebar.selectbox("Choose the app language:", list(languages.keys()))
-if language != st.session_state.get('prev_language'):
-    st.cache_data.clear()
-    st.session_state['prev_language'] = language
-if language:
-    st.session_state['language'] = language
-
-header_prompt = f"""Only output this header - NOTHING else. 
-It's crucial you musn't change ANYTHING, otherwise it will cause confusion among users. 
-Translate the heading to {language} if language isn't English. 
-Don't change ANYTHING from the text either and AVOID repetition at all costs."""
 
 st.title(generate_response(title_prompt + "MATH WIZARD"), text_alignment='center')
 
@@ -57,7 +51,6 @@ choice4 = generate_response(title_prompt + "University")
 difficulty = st.selectbox(header4, (choice, choice2, choice3, choice4))
 user_question = st.text_input(generate_response(title_prompt + "How can I help you today?"))
 solve = st.button(generate_response(title_prompt + "Solve"))
-
 if solve:
     prompt = f"""
     You are a math wizard helping a {difficulty} student solve a difficult question. 
