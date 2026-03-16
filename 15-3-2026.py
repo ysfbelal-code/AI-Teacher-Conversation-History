@@ -56,7 +56,11 @@ difficulty = st.selectbox(grade, (choice, choice2, choice3, choice4), key='diffi
 user_question = st.text_input(help, key='question_input')
 solve = st.button(solve_question, key='solve_button')
 
-if solve:
+if clear:
+    st.session_state['conversation'] = []
+    result = generate_response(title_prompt+"Conversation history cleared")
+    st.toast(result)
+elif solve:
     prompt = f"""
     You are a math wizard helping a {difficulty} student solve a difficult question. 
     Be comprehensive and helpful with your explanations, and don't change the subject. 
