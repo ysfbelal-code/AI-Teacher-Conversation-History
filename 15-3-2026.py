@@ -13,7 +13,7 @@ if language:
 
 title_prompt = f"""Only output this title - NOTHING else. 
 It's crucial you musn't change ANYTHING, otherwise it will cause confusion among users. 
-Translate the heading to {st.session_state['language']} if language isn't English. 
+Translate the heading to {language}. 
 Don't change ANYTHING from the text either and AVOID repetition at all costs."""
 
 st.set_page_config(page_title=generate_response(title_prompt + "AI MATH MASTERMIND"), layout='centered')
