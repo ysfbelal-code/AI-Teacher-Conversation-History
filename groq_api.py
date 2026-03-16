@@ -22,7 +22,8 @@ def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512, 
                             Don't change ANYTHING from the text either and AVOID repetition at all costs. {prompt}"""}, 
                 {'role': 'user', 'content': prompt}],
                 temperature=temperature,
-                max_tokens=tokens, 
+                max_tokens=tokens,
+                extra_body={'thinking': {'type': 'disabled'}} 
             )
             content = r.choices[0].message.content
             if content is not None:
