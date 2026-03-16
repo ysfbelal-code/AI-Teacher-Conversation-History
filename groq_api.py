@@ -3,7 +3,7 @@ from openai import OpenAI
 
 @streamlit.cache_data(show_spinner=False)
 
-def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 1024):
+def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512):
     apikey = streamlit.secrets['groq_api']
     groq_url = "https://api.groq.com/openai/v1"
     models = streamlit.secrets.get('GROQ_MODELS', ['meta-llama/llama-prompt-guard-2-22m', 'meta-llama/llama-prompt-guard-2-86m'])
