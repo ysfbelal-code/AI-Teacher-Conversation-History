@@ -3,7 +3,7 @@ from openai import OpenAI
 
 @streamlit.cache_data(show_spinner=False)
 
-def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512):
+def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512, language: str = 'English') -> str:
     url = "https://api.groq.com/openai/v1"
     apikey = streamlit.secrets['groq_api']
     models = streamlit.secrets.get('GROQ_MODELS', ['qwen/qwen3-32b', 'moonshotai/kimi-k2-instruct', 'llama-3.3-70b-versatile',])
@@ -16,9 +16,13 @@ def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 512):
             c = OpenAI(api_key=apikey, base_url=url)
             r = c.chat.completions.create(
                 model=m,
-                messages=[{'role': 'user', 'content': prompt}],
+                messages=[{'role':'system', "content": f"""Only output this text - NOTHING else. 
+                            It's crucial you musn't change ANYTHING, otherwise it will cause confusion among users. 
+                            Translate the heading to {language} if language isn't English. 
+                            Don't change ANYTHING from the text either and AVOID repetition at all costs. {prompt}"""}, 
+                {'role': 'user', 'content': prompt}],
                 temperature=temperature,
-                max_tokens=tokens
+                max_tokens=tokens, 
             )
             content = r.choices[0].message.content
             if content is not None:
