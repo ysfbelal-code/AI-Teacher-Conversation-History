@@ -30,8 +30,8 @@ html, body, [class*="css"], [class*="st-"], .stApp, .stApp * {
     font-family: 'Yu Gothic UI Light', Yu, sans-serif !important;
 }
             
-.stMarkdown, .stMarkdown * {
-    font-size: 1.1rem !important;            
+.stMarkdown p, .stMarkdown  li, .stMarkdown pre {
+    font-size: 0.9rem !important;            
 }
 </style>
 """, unsafe_allow_html=True)
