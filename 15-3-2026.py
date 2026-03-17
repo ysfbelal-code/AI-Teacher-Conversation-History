@@ -35,7 +35,7 @@ header = generate_response(title_prompt + "View conversation history")
 header2 = generate_response(title_prompt + "Clear conversation history")
 header3 = generate_response(title_prompt + "Export conversation history")
 
-st.title(title, text_alignment='center')
+st.markdown(f"<h1 style='text-align:center'>{title}</h1>", unsafe_allow_html=True)
 c1, c2, c3 = st.columns([1,1,1])
 with c1:
     view = st.button(header, key='view_button')
