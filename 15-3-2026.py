@@ -66,8 +66,13 @@ if clear:
         result = generate_response(title_prompt+"Conversation history already empty.")
     st.toast(result)
 elif view:
-    for i, chat in enumerate(st.session_state.conversation, 1):
-        print(f"Q{i}:\n{chat['question']}\nA{i}:{chat['answer']}\n\n")
+    if st.session_state['conversation'] != []:
+        for i, chat in enumerate(st.session_state.conversation, 1):
+            result = generate_response(title_prompt: f"Q{i}:\n{chat['question']}\nA{i}:{chat['answer']}\n\n")
+        st.markdown(result)
+    else:
+        result = generate_response(title_prompt + "Conversation history empty.")
+        st.toast(result)
 elif solve:
     prompt = f"""
     You are a math wizard helping a {difficulty} student solve a difficult question. 
