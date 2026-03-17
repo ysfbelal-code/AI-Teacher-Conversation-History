@@ -28,6 +28,13 @@ else:
 if language in rtl:
     st.markdown("""
     <style>
+    .stMarkdown, .stMarkdown *,
+    .stExpander, .stExpander *,
+    [data-testid="stExpander"], [data-testid="stExpander"] * {
+        direction: rtl !important;
+        text-align: right !important;
+    }
+
     .stMarkdown ul, .stMarkdown ol {
     direction: rtl !important;
     text-align: right !important;
@@ -39,7 +46,6 @@ if language in rtl:
     direction: rtl !important;
     text-align: right !important;
 }
-    }
     </style>
     """, unsafe_allow_html=True)
     
