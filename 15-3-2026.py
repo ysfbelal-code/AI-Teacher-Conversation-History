@@ -101,7 +101,7 @@ with c2:
 with c3:
     export = st.button(header3, key='export_button')
 
-grade = generate_response(title_prompt + "Which grade are you? This will determine the difficulty of the questions:")
+grade = generate_response(title_prompt + "Which grade are you? This will determine the AI's answers:")
 choice = generate_response(title_prompt + "Primary/Elementary")
 choice2 = generate_response(title_prompt + "Secondary/Middle School")
 choice3 = generate_response(title_prompt + "6th Form/High School")
