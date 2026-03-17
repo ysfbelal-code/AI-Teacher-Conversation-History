@@ -3,7 +3,7 @@ from openai import OpenAI
 
 @st.cache_data(show_spinner=False)
 
-def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 1024) -> str:
+def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 8192) -> str:
     url = "https://api.groq.com/openai/v1"
     apikey = st.secrets['groq_api']
     models = st.secrets.get('GROQ_MODELS', ['qwen/qwen3-32b', 'moonshotai/kimi-k2-instruct', 'llama-3.3-70b-versatile',])
