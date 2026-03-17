@@ -28,9 +28,11 @@ else:
 if st.session_state['language'] in rtl:
     st.markdown("""
     <style>
-    .stMarkdown, .stMarkdown * {
-        direction: rtl;
-        text-align: right;
+    .stMarkdown, .stMarkdown *,
+    .stExpander, .stExpander *,
+    [data-testid="stExpander"], [data-testid="stExpander"] * {
+        direction: rtl !important;
+        text-align: right !important;
     }
     </style>
     """, unsafe_allow_html=True)
