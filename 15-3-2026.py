@@ -47,6 +47,11 @@ html, body, [class*="css"], [class*="st-"], .stApp, .stApp * {
     font-family: monospace;
     font-size: 1rem;
 }
+
+[data-testid="stSidebarCollapseButton"] {
+    display: flex;
+    justify-content: center;
+}
 </style>
 """, unsafe_allow_html=True)
 
