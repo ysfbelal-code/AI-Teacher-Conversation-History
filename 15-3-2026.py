@@ -21,10 +21,20 @@ if language:
     st.session_state['language'] = language
 
 if st.session_state['language'] == "English":
-    title_prompt = "Output ONLY the following text, exactly as written. Nothing else.\n"
+    title_prompt = "Output ONLY the following text, exactly as written. Nothing else. Keep ALL mathematical expressions, variables, numbers, and symbols exactly as they appear in the original.\n"
 else:
-    title_prompt = f"Translate the following text to {language}. ONLY output the translation, nothing else.\n"
+    title_prompt = f"Translate the following text to {language}. ONLY output the translation, nothing else. Keep ALL mathematical expressions, variables, numbers, and symbols exactly as they appear in the original. Only translate the surrounding text words.\n"
 
+if st.session_state['language'] in rtl:
+    st.markdown("""
+    <style>
+    .stMarkdown, .stMarkdown * {
+        direction: rtl;
+        text-align: right;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
 st.markdown("""
 <style>
 @import url('');
