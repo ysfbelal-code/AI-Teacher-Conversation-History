@@ -29,14 +29,18 @@ if st.session_state['language'] in rtl:
     st.markdown("""
     <style>
     .stMarkdown p, .stMarkdown li, .stMarkdown pre,
-    .stExpander, .stExpander *,
     [data-testid="stExpander"], [data-testid="stExpander"] * {
         direction: rtl !important;
         text-align: right !important;
     }
 
-    [data-testid="stTextInput"] input,
-    [data-testid="stSelectbox"] div {
+    [data-testid="stTextInputRootElement"] input,
+    [data-baseweb="input"] input {
+        direction: rtl !important;
+        text-align: right !important;
+    }
+
+    [data-testid="stWidgetLabel"] p {
         direction: rtl !important;
         text-align: right !important;
     }
