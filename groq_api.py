@@ -16,7 +16,7 @@ def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 1024)
             c = OpenAI(api_key=apikey, base_url=url)
             r = c.chat.completions.create(
                 model=m,
-                messages=[{'role':'system', "content": "You follow instructions exactly. Output ONLY what is asked — no preamble, no explanation, no extra text."}, 
+                messages=[{'role':'system', "content": "You follow instructions exactly. Output ONLY what is asked — no preamble, no explanation, no extra text. If there's a word with multiple meanings in the other language, output the first thing that comes to mind."}, 
                 {'role': 'user', 'content': prompt}],
                 temperature=temperature,
                 max_tokens=tokens
