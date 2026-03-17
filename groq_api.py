@@ -23,9 +23,6 @@ def generate_response(prompt: str, temperature: float = 0.3, tokens: int = 1024)
             )
 
             content = r.choices[0].message.content
-            
-            if '<think>' in content and '</think>' in content:
-                content = content.split('</think>')[-1].strip()
 
             if content is not None:
                 return content
