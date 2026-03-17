@@ -8,6 +8,8 @@ st.session_state.setdefault('conversation', [])
 
 language = st.sidebar.selectbox("Choose the app language:", list(languages.keys()), key='language_select')
 
+rtl = ('Arabic', 'Hebrew', 'Urdu', 'Persian', 'Pashto', 'Sindhi', 'Uyghur', 'Yiddish')
+
 if 'language' not in st.session_state:
     st.session_state['language'] = 'English'
 
@@ -76,7 +78,8 @@ Trigonometry - ABC is a right-angled triangle.
 The height - AB - is 12cm and the hypotenuse - BC - is 13cm.
 Calculate angle x at the base.
 
-Discrete Maths - If a set B has n elements, then what is the total number of subsets of B? Justify your answer."""))
+Discrete Maths - If a set B has n elements, then what is the total number of subsets of B? Justify your answer.""")
+, text_alignment='left' if language not in rtl else 'right')
     
 c1, c2, c3 = st.columns([1,1,1])
 with c1:
@@ -109,7 +112,7 @@ elif view:
     if st.session_state['conversation'] != []:
         for i, chat in enumerate(st.session_state.conversation, 1):
             result = generate_response(title_prompt + f"Q{i}:\n{chat['question']}\nA{i}:{chat['answer']}\n\n")
-        st.markdown(result)
+        st.markdown(result, text_alignment='left' if language not in rtl else 'right')
     else:
         result = generate_response(title_prompt + "Conversation history empty.")
         st.toast(result)
@@ -139,6 +142,6 @@ elif solve:
         with st.spinner("Thinking carefully..."):
             answer = generate_response(prompt)
             st.session_state.conversation.append({'question':user_question.strip(), 'answer':answer})
-        st.markdown(answer)
+        st.markdown(answer, text_alignment='left' if language not in rtl else 'right')
     else:
         st.toast(generate_response(title_prompt + "Please enter a question if you want to use this AI."))
