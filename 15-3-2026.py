@@ -107,7 +107,7 @@ elif solve:
         
         with st.spinner("Thinking carefully..."):
             answer = generate_response(prompt)
-            st.session_state.conversation.append()
+            st.session_state.conversation.append({'question':user_question.strip(), 'answer':answer})
         st.markdown(answer)
     else:
         st.toast(generate_response(title_prompt + "Please enter a question if you want to use this AI."))
