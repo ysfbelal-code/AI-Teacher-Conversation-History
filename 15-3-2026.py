@@ -62,6 +62,22 @@ header2 = generate_response(title_prompt + "Clear conversation history")
 header3 = generate_response(title_prompt + "Export conversation history")
 
 st.markdown(f"<h1 style='text-align:center'>{title}</h1>", unsafe_allow_html=True)
+with st.expander("Examples of problems I can solve:"):
+    st.markdown(
+"""
+Probability - There are 17 counters in a bag,
+4 of the counters are red and the rest are blue.
+A counter is taken from the bag at random.
+Find the probability that the counter is blue
+
+Algebra - Simplify (x-7)(x+9)
+
+Trigonometry - ABC is a right-angled triangle.
+The height - AB - is 13cm and the hypotenuse - BC - is 13cm.
+Calculate angle x at the base.
+
+Discrete Maths - If a set B has n elements, then what is the total number of subsets of B? Justify your answer.""")
+    
 c1, c2, c3 = st.columns([1,1,1])
 with c1:
     view = st.button(header, key='view_button')
