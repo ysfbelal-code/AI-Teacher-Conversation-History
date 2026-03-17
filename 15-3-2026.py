@@ -25,20 +25,43 @@ if st.session_state['language'] == "English":
 else:
     title_prompt = f"Translate the following text to {language}. ONLY output the translation, nothing else. Keep ALL mathematical expressions, variables, numbers, and symbols exactly as they appear in the original. Only translate the surrounding text words.\n"
 
-if language in rtl:
+if st.session_state['language'] in rtl:
     st.markdown("""
     <style>
-    .stMarkdown p, .stMarkdown li, .stMarkdown pre,
-    .stMarkdown ul, .stMarkdown ol,
-    .stExpander, .stExpander *,
-    [data-testid="stExpander"], [data-testid="stExpander"] * {
+    /* Paragraphs and text blocks */
+    .stMarkdown p {
         direction: rtl !important;
         text-align: right !important;
+    }
+
+    /* Bullet and numbered lists */
+    .stMarkdown ul, .stMarkdown ol {
+        direction: rtl !important;
         padding-right: 1.5rem !important;
         padding-left: 0 !important;
     }
+    .stMarkdown li {
+        direction: rtl !important;
+        text-align: right !important;
+    }
 
-    h1, h1 * {
+    /* Code blocks */
+    .stMarkdown pre {
+        direction: rtl !important;
+        text-align: right !important;
+    }
+
+    /* Expander content */
+    [data-testid="stExpander"] p,
+    [data-testid="stExpander"] li,
+    [data-testid="stExpander"] ul,
+    [data-testid="stExpander"] ol {
+        direction: rtl !important;
+        text-align: right !important;
+    }
+
+    /* Explicitly protect the title */
+    h1 {
         direction: ltr !important;
         text-align: center !important;
     }
