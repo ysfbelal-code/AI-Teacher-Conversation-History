@@ -34,14 +34,13 @@ html, body, [class*="css"], [class*="st-"], .stApp, .stApp * {
     font-size: 1.0rem !important;            
 }
 
-[data-testid="collapsedControl"]::before {
-    content: '|||';
-    font-size: 1rem;
-    color: inherit;
-}
-
 [data-testid="collapsedControl"] svg {
     display: none;
+}
+
+[data-testid="collapsedControl"]::after {
+    content: '|||';
+    font-size: 1rem;
 }
 </style>
 """, unsafe_allow_html=True)
