@@ -97,12 +97,17 @@ elif view:
         result = generate_response(title_prompt + "Conversation history empty.")
         st.toast(result)
 elif solve:
-    prompt = f"""
-    You are a math wizard helping a {difficulty} student solve a difficult question. 
-    The answers should not be too short, and be comprehensive and helpful with your explanations, and don't change the subject. 
-    Do NOT include any profanity whatsoever, this program is used by students.
-    Show your methods of working out and include concise diagrams.
-    Answer this question: {user_question}"""
-    with st.spinner("Thinking carefully..."):
-        answer = generate_response(prompt)
-    st.markdown(answer)
+    if user_question.strip():
+        prompt = f"""
+        You are a math wizard helping a {difficulty} student solve a difficult question. 
+        The answers should not be too short, and be comprehensive and helpful with your explanations, and don't change the subject. 
+        Do NOT include any profanity whatsoever, this program is used by students.
+        Show your methods of working out and include concise diagrams.
+        Answer this question: {user_question}"""
+        
+        with st.spinner("Thinking carefully..."):
+            answer = generate_response(prompt)
+            st.session_state.conversation.append()
+        st.markdown(answer)
+    else:
+        st.toast(generate_response(title_prompt + "Please enter a question if you want to use this AI."))
