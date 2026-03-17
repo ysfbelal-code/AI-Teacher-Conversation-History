@@ -25,14 +25,14 @@ if st.session_state['language'] == "English":
 else:
     title_prompt = f"Translate the following text to {language}. ONLY output the translation, nothing else. Keep ALL mathematical expressions, variables, numbers, and symbols exactly as they appear in the original. Only translate the surrounding text words.\n"
 
-if st.session_state['language'] in rtl:
+if language in rtl:
     st.markdown("""
     <style>
-    .stMarkdown, .stMarkdown *,
+    .stMarkdown p, .stMarkdown li, .stMarkdown pre,
     .stExpander, .stExpander *,
     [data-testid="stExpander"], [data-testid="stExpander"] * {
         direction: rtl !important;
-        text-align: right !important;
+        text-align: left !important;
     }
     </style>
     """, unsafe_allow_html=True)
