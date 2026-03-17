@@ -32,7 +32,7 @@ if language in rtl:
     .stExpander, .stExpander *,
     [data-testid="stExpander"], [data-testid="stExpander"] * {
         direction: rtl !important;
-        text-align: left !important;
+        text-align: right !important;
     }
     </style>
     """, unsafe_allow_html=True)
