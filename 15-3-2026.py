@@ -28,42 +28,11 @@ else:
 if st.session_state['language'] in rtl:
     st.markdown("""
     <style>
-    /* Paragraphs and text blocks */
-    .stMarkdown p {
+    .stMarkdown p, .stMarkdown li, .stMarkdown pre,
+    .stExpander, .stExpander *,
+    [data-testid="stExpander"], [data-testid="stExpander"] * {
         direction: rtl !important;
-        text-align: right !important;
-    }
-
-    /* Bullet and numbered lists */
-    .stMarkdown ul, .stMarkdown ol {
-        direction: rtl !important;
-        padding-right: 1.5rem !important;
-        padding-left: 0 !important;
-    }
-    .stMarkdown li {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-
-    /* Code blocks */
-    .stMarkdown pre {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-
-    /* Expander content */
-    [data-testid="stExpander"] p,
-    [data-testid="stExpander"] li,
-    [data-testid="stExpander"] ul,
-    [data-testid="stExpander"] ol {
-        direction: rtl !important;
-        text-align: right !important;
-    }
-
-    /* Explicitly protect the title */
-    h1 {
-        direction: ltr !important;
-        text-align: center !important;
+        text-align: left !important;
     }
     </style>
     """, unsafe_allow_html=True)
