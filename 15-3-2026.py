@@ -34,15 +34,18 @@ html, body, [class*="css"], [class*="st-"], .stApp, .stApp * {
     font-size: 1.0rem !important;            
 }
 
-[data-testid="collapsedControl"] * {
+[data-testid="stIconMaterial"] {
     visibility: hidden;
+    position: relative;
 }
 
-[data-testid="collapsedControl"]::before {
+[data-testid="stIconMaterial"]::before {
     content: '|||';
     visibility: visible;
-    font-size: 1rem;
+    position: absolute;
+    left: 0;
     font-family: monospace;
+    font-size: 1rem;
 }
 </style>
 """, unsafe_allow_html=True)
