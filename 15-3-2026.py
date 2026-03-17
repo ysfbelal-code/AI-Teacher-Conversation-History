@@ -96,6 +96,20 @@ elif view:
     else:
         result = generate_response(title_prompt + "Conversation history empty.")
         st.toast(result)
+elif export:
+    def export_bytes(history):
+        for i, chat in enumerate(st.session_state.conversation, 1):
+            text = "".join(f"Q{i}:\n{chat['question']}\nA{i}:{chat['answer']}\n\n")
+            return io.BytesIO(text.encode("utf-8"))
+    if st.session_state.conversation != []:
+        st.download_button(
+            label="Export chat history", 
+            data = export_bytes(st.session_state.conversation),
+            file_name = "AI_Math_Wizard_Conversation_History.txt",
+            mime="text/plain"
+        )
+    else:
+        st.toast(generate_response(title_prompt + "Conversation history empty."))
 elif solve:
     if user_question.strip():
         prompt = f"""
