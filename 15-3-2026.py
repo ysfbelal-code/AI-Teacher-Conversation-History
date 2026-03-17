@@ -33,6 +33,16 @@ html, body, [class*="css"], [class*="st-"], .stApp, .stApp * {
 .stMarkdown p, .stMarkdown  li, .stMarkdown pre {
     font-size: 1.0rem !important;            
 }
+
+[data-testid="collapsedControl"]::before {
+    content: '|||';
+    font-size: 1rem;
+    color: inherit;
+}
+
+[data-testid="collapsedControl"] svg {
+    display: none;
+}
 </style>
 """, unsafe_allow_html=True)
 
