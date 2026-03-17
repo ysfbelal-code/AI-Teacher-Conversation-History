@@ -72,5 +72,6 @@ elif solve:
     Do NOT include any profanity whatsoever, this program is used by students.
     Show your methods of working out and include concise diagrams.
     Answer this question: {user_question}"""
-    answer = generate_response(prompt)
+    with st.spinner("Thinking carefully..."):
+        answer = generate_response(prompt)
     st.markdown(answer)
