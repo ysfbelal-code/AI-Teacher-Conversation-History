@@ -1,6 +1,7 @@
 from groq_api import generate_response
 import streamlit as st
 from languages import languages
+import io
 
 st.set_page_config(page_title="AI MATH MASTERMIND", layout='centered')
 st.session_state.setdefault('conversation', [])
