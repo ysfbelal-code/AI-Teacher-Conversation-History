@@ -41,7 +41,7 @@ html, body, [class*="css"], [class*="st-"], .stApp, .stApp * {
 }
 
 [data-testid="stIconMaterial"]::before {
-    content: '|||';
+    content: '||';
     visibility: visible;
     position: absolute;
     left: 0;
