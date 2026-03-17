@@ -34,13 +34,15 @@ html, body, [class*="css"], [class*="st-"], .stApp, .stApp * {
     font-size: 1.0rem !important;            
 }
 
-[data-testid="collapsedControl"] svg {
-    display: none;
+[data-testid="collapsedControl"] * {
+    visibility: hidden;
 }
 
-[data-testid="collapsedControl"]::after {
+[data-testid="collapsedControl"]::before {
     content: '|||';
+    visibility: visible;
     font-size: 1rem;
+    font-family: monospace;
 }
 </style>
 """, unsafe_allow_html=True)
