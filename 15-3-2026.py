@@ -70,6 +70,7 @@ elif solve:
     You are a math wizard helping a {difficulty} student solve a difficult question. 
     Be comprehensive and helpful with your explanations, and don't change the subject. 
     Do NOT include any profanity whatsoever, this program is used by students.
+    Show your methods of working out and include concise diagrams.
     Answer this question: {user_question}"""
     answer = generate_response(prompt)
     st.markdown(answer)
