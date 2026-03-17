@@ -59,12 +59,15 @@ user_question = st.text_input(help, key='question_input')
 solve = st.button(solve_question, key='solve_button')
 
 if clear:
-    if st.session_state['conversation'] is not None:
+    if st.session_state['conversation'] != []:
         st.session_state['conversation'] = []
         result = generate_response(title_prompt+"Conversation history cleared!")
     else:
         result = generate_response(title_prompt+"Conversation history already empty.")
     st.toast(result)
+elif view:
+    for i, chat in enumerate(st.session_state.conversation, 1):
+        print(f"Q{i}:\n{chat['question']}\nA{i}:{chat['answer']}\n\n")
 elif solve:
     prompt = f"""
     You are a math wizard helping a {difficulty} student solve a difficult question. 
