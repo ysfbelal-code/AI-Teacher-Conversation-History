@@ -74,7 +74,7 @@ header2 = generate_response(title_prompt + "Clear conversation history")
 header3 = generate_response(title_prompt + "Export conversation history")
 
 st.markdown(f"<h1 style='text-align:center'>{title}</h1>", unsafe_allow_html=True)
-with st.expander("Examples of problems I can solve:"):
+with st.expander(generate_response(title_prompt + "Examples of problems I can solve:")):
     st.markdown(generate_response(title_prompt + 
 """
 Probability - There are 17 counters in a bag,
