@@ -31,7 +31,7 @@ html, body, [class*="css"], [class*="st-"], .stApp, .stApp * {
 }
             
 .stMarkdown, .stMarkdown * {
-    font-size: 0.9rem !important;            
+    font-size: 1.1rem !important;            
 }
 </style>
 """, unsafe_allow_html=True)
