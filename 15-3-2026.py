@@ -9,16 +9,18 @@ language = st.sidebar.selectbox("Choose the app language:", list(languages.keys(
 
 if 'language' not in st.session_state:
     st.session_state['language'] = 'English'
+
 if language != st.session_state.get('prev_language'):
     st.cache_data.clear()
     st.session_state['prev_language'] = language
+
 if language:
     st.session_state['language'] = language
 
-title_prompt = f"""Only output this title - NOTHING else. 
-It's crucial you musn't change ANYTHING, otherwise it will cause confusion among users. 
-Translate the heading to {st.session_state['language']} if language isn't English. 
-Don't change ANYTHING from the text either and AVOID repetition at all costs."""
+if st.session_state['language'] == "English":
+    title_prompt = "Output ONLY the following text, exactly as written. Nothing else.\n"
+else:
+    title_prompt = f"Translate the following text to {language}. ONLY output the translation, nothing else.\n"
 
 st.markdown("""
 <style>
